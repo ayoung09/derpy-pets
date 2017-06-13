@@ -5,7 +5,6 @@ import {
 } from 'react-router-dom';
 import Navbar from './components/Navbar.js';
 import HomePage from './components/HomePage.js';
-import './App.css';
 
 const App = () => (
   <Router>
