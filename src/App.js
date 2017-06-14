@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -6,13 +6,24 @@ import {
 import Navbar from './components/Navbar.js';
 import HomePage from './components/HomePage.js';
 
-const App = () => (
-  <Router>
-    <div>
-      <Navbar />
-      <Route exact path="/" component={HomePage}/>
-    </div>
-  </Router>
-);
+import receiveAllPets from './reducers/pets';
+
+class App extends Component {
+
+  ComponentDidMount() {
+
+  }
+
+  render () {
+    return (
+      <Router>
+        <div>
+          <Navbar />
+          <Route exact path="/" component={HomePage} />
+        </div>
+      </Router>
+    );
+  }
+}
 
 export default App;
