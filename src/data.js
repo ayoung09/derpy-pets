@@ -5,7 +5,7 @@ export default [
     pictureUrl: '',
   },
   {
-    name: 'Chesire Cat',
+    name: 'Cheshire Cat',
     type: 'cat',
     pictureUrl: '',
   },

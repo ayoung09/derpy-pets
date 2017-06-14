@@ -2,13 +2,14 @@ const initialState = {
   allPets: [],
   cats: [],
   dogs: [],
-  favorites: [],
+  petsToDisplay: 'allPets',
 };
 
 //constants
 const RECEIVE_ALL_PETS = 'RECEIVE_ALL_PETS';
-const ADD_FAVORITE = 'ADD_FAVORITE';
-const REMOVE_FAVORITE = 'REMOVE_FAVORITE';
+const RECEIVE_CATS = 'RECEIVE_CATS';
+const RECEIVE_DOGS = 'RECEIVE_DOGS';
+const SET_PETS_TO_DISPLAY = 'SET_PETS_TO_DISPLAY';
 
 //reducer
 const petsReducer = (prevState = initialState, action) => {
@@ -17,11 +18,16 @@ const petsReducer = (prevState = initialState, action) => {
   switch (action.type) {
     case RECEIVE_ALL_PETS:
       newState.allPets = action.allPets;
+      console.log('in pets reducer', newState);
       break;
-    case ADD_FAVORITE:
-      newState.favorites.push(action.newFavorite);
+    case RECEIVE_CATS:
+      newState.cats = action.cats;
       break;
-    case REMOVE_FAVORITE:
+    case RECEIVE_DOGS:
+      newState.dogs = action.dogs;
+      break;
+    case SET_PETS_TO_DISPLAY:
+      newState.petsToDisplay = action.animalType;
       break;
     default:
       return prevState;
@@ -45,14 +51,9 @@ export const receiveDogs = (dogsArray) => ({
   dogs: dogsArray,
 });
 
-export const addFavorite = (petObj) => ({
-  type: ADD_FAVORITE,
-  newFavorite: petObj,
-});
-
-export const removeFavorite = (index) => ({
-  type: REMOVE_FAVORITE,
-  removeAt: index,
+export const setPetsToDisplay = (animalType) => ({
+  type: SET_PETS_TO_DISPLAY,
+  animalType: animalType,
 });
 
 export default petsReducer;

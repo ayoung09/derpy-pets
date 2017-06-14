@@ -3,25 +3,36 @@ import {
   BrowserRouter as Router,
   Route,
 } from 'react-router-dom';
-import Navbar from './components/Navbar.js';
-import HomePage from './components/HomePage.js';
+import { Provider } from 'react-redux';
+import HomePage from './components/HomePage';
 
-import receiveAllPets from './reducers/pets';
+import store from './store';
+import { receiveAllPets, receiveCats, receiveDogs } from './reducers/pets';
+import petData from './data';
 
 class App extends Component {
 
-  ComponentDidMount() {
+  componentWillMount() {
+    store.dispatch(receiveAllPets(petData));
+    store.dispatch(receiveCats(this.filterByAnimalType('cat', petData)));
+    store.dispatch(receiveDogs(this.filterByAnimalType('dog', petData)));
+  }
 
+  filterByAnimalType(animalType, dataSet) {
+    return dataSet.filter(animalObj => {
+      return animalObj.type === animalType;
+    });
   }
 
   render () {
     return (
-      <Router>
-        <div>
-          <Navbar />
-          <Route exact path="/" component={HomePage} />
-        </div>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <div>
+            <Route exact path="/" component={HomePage} />
+          </div>
+        </Router>
+      </Provider>
     );
   }
 }
